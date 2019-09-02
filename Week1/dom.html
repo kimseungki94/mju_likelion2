@@ -1,0 +1,89 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./dom.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>DOM 객체 p의 프로퍼티, 스타일
+        ,이벤트 리스너
+    </h3>
+    <hr>
+    <p id="firstP" style="color: blue; background:yellow" onclick="this.style.color='teal'">
+        이것은 <span style="color: red">문장입니다.</span>
+        <script>
+            let p = document.getElementById("firstP");
+            let text = "p.id =" + p.id + "\n";
+            text += "p.tagName = " + p.tagName + "\n";
+            text += "p.innerHTML = " + p.innerHTML + "\n";
+            text += "p.style.color = " + p.style.color + "\n";
+            text += "p.onclick = " + p.onclick + "\n";
+            text += "p.childElementCount = " + p.childElementCount + "\n";
+            text += "너비 " + p.offsetWidth + "\n";
+            text += "높이 " + p.offsetHeight + "\n";
+            alert(text);
+            document.write(text);
+        </script>
+    </p>
+
+</body>
+
+</html>
+
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript DOM Element</title>
+</head>
+
+<body>
+
+    <h1>HTML 태그 이름을 이용한 선택</h1>
+    <ul>
+        <li>첫 번째 아이템이에요!</li>
+        <li>두 번째 아이템이에요!</li>
+        <li>세 번째 아이템이에요!</li>
+        <li>네 번째 아이템이에요!</li>
+        <li>다섯 번째 아이템이에요!</li>
+    </ul>
+
+    <script>
+        let selectedItem = document.getElementsByTagName("li");		// 모든 <li> 요소를 선택함.
+        for (let i = 0; i < selectedItem.length; i++) {
+            selectedItem.item(i).style.color = "red";	// 선택된 모든 요소의 텍스트 색상을 변경함.
+        }
+    </script>
+
+</body>
+
+</html>
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./dom.js"></script>
+   
+</head>
+<body onload="changecolor()">
+        <h1>아이디를 이용한 선택</h1>
+        <ul>
+            <li>첫 번째 아이템이에요!</li>
+            <li id="even">두 번째 아이템이에요!</li>
+            <li>세 번째 아이템이에요!</li>
+            <li id="even">네 번째 아이템이에요!</li>
+            <li>다섯 번째 아이템이에요!</li>
+        </ul>
+</body>
+</html>
