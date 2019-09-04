@@ -1,1 +1,1 @@
-# mju_likelion_Semainar2
+# mju_likelion_Seminar2
