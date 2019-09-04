@@ -10,11 +10,99 @@
 </head>
 
 <body>
+    <h1>도박을 근절합시다... </h1>
     <p id="abc">JavaScript는 HTML 컨텐츠를 변경할 수 있다. 아래 것을 Click !</p>
 
     <button type="button" onclick="document.getElementById('abc').innerHTML=`${randFace()}`">Click !</button>
-    <h1>helloa</h1>
-    
+    베팅금액 : <input type="text" id="betting" name="베팅금액" />
+
+    <button type="button" id="bettingmoneybtn" onclick="myFunction()">선택</button>
+    <p id="betMoney">도박금액..</p>
+
+
+    자신이 선택할 3가지
+    <div id="chooseyourlandmark">
+        <select class="select1" onclick="selectfunction1()">
+            <option value="선택">선택</option>
+            <option value="크라운">크라운</option>
+            <option value="앵커">앵커</option>
+            <option value="하트">하트</option>
+            <option value="클럽">클럽</option>
+            <option value="스페이드">스페이드</option>
+            <option value="다이아몬드">다이아몬드</option>
+        </select>
+        <select class="select2" onclick="selectfunction2()">
+            <option value="선택">선택</option>
+            <option value="크라운">크라운</option>
+            <option value="앵커">앵커</option>
+            <option value="하트">하트</option>
+            <option value="클럽">클럽</option>
+            <option value="스페이드">스페이드</option>
+            <option value="다이아몬드">다이아몬드</option>
+        </select>
+        <select class="select3" onclick="selectfunction3()">
+            <option value="선택">선택</option>
+            <option value="크라운">크라운</option>
+            <option value="앵커">앵커</option>
+            <option value="하트">하트</option>
+            <option value="클럽">클럽</option>
+            <option value="스페이드">스페이드</option>
+            <option value="다이아몬드">다이아몬드</option>
+        </select>
+
+    </div>
+
+    <button type="button" onclick="showround()">Click !</button>
+    <p id="round">라운드..</p>
+
+    <br>
+    <h9 id="choose1">선택 1</h9> : <input type="text" id="betting1" name="베팅금액" /> <button type="button" id="selectbtn1"
+        onclick="outputfunction1()">선택</button>
+    <br>
+    <h9 id="choose2">선택 2</h9> : <input type="text" id="betting2" name="베팅금액" /> <button type="button" id="selectbtn2"
+        onclick="outputfunction2()">선택</button>
+    <br>
+    <h9 id="choose3">선택 3</h9> : <input type="text" id="betting3" name="베팅금액" /> <button type="button" id="selectbtn3"
+        onclick="outputfunction3()">선택</button>
+
+    <br>
+    <p id="sample">도전</p>
+
+    <br>
+    <button type="button" onclick="start()">도박시작</button>
+    <div id="result">
+        <p class="round">당신이 한 도박은..</p>
+        <p class="totalBet">당신이 한 도박은..</p>
+        <p class="totalremain">당신이 한 도박은..</p>
+    </div>
+    <h8 id="mar1">1</h8>
+    <h8 id="mar2">2</h8>
+    <h8 id="mar3">3</h8>
+    <br>
+    <h9 id="comparebet">돈땃니?</h9>
+    <h9 id="comparebet123">돈땃니?</h9>
+    <br>
+    <h8 id="winningnum">승리몇번했어?</h8>
+    <br>
+    <h8 id="earning">수익금은?</h8>
 </body>
 
 </html>
+
+
+
+<!-- let person = {
+    name: ['Bob', 'Smith'],
+    age: 32,
+    gender: 'male',
+    interests: ['music', 'skiing'],
+    
+};
+document.write(`${person.name}` + '<br>');
+document.write(`${person.name[0]}` + '<br>');
+document.write(`${person.age}` + '<br>');
+document.write(`${person.interests[1]}` + '<br>');
+
+document.write(`${randFace()}`);
+
+console.log(`${randFace()}`); -->
