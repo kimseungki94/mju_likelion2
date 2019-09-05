@@ -11,9 +11,6 @@
 
 <body>
     <h1>도박을 근절합시다... </h1>
-    <p id="abc">JavaScript는 HTML 컨텐츠를 변경할 수 있다. 아래 것을 Click !</p>
-
-    <button type="button" onclick="document.getElementById('abc').innerHTML=`${randFace()}`">Click !</button>
     베팅금액 : <input type="text" id="betting" name="베팅금액" />
 
     <button type="button" id="bettingmoneybtn" onclick="myFunction()">선택</button>
@@ -52,9 +49,6 @@
 
     </div>
 
-    <button type="button" onclick="showround()">Click !</button>
-    <p id="round">라운드..</p>
-
     <br>
     <h9 id="choose1">선택 1</h9> : <input type="text" id="betting1" name="베팅금액" /> <button type="button" id="selectbtn1"
         onclick="outputfunction1()">선택</button>
@@ -65,9 +59,8 @@
     <h9 id="choose3">선택 3</h9> : <input type="text" id="betting3" name="베팅금액" /> <button type="button" id="selectbtn3"
         onclick="outputfunction3()">선택</button>
 
+    
     <br>
-    <p id="sample">도전</p>
-
     <br>
     <button type="button" onclick="start()">도박시작</button>
     <div id="result">
@@ -75,34 +68,23 @@
         <p class="totalBet">당신이 한 도박은..</p>
         <p class="totalremain">당신이 한 도박은..</p>
     </div>
-    <h8 id="mar1">1</h8>
-    <h8 id="mar2">2</h8>
-    <h8 id="mar3">3</h8>
+    <p id="test">테스트</p>
+    <h8 id="mar1">사용자가</h8>
+    <h8 id="mar2">선택한</h8>
+    <h8 id="mar3">문양</h8>
     <br>
-    <h9 id="comparebet">돈땃니?</h9>
-    <h9 id="comparebet123">돈땃니?</h9>
+    <h8 id="result1">딴돈?</h8>
     <br>
-    <h8 id="winningnum">승리몇번했어?</h8>
+    <h8 id="result2">현재돈?</h8>
     <br>
-    <h8 id="earning">수익금은?</h8>
+
+    <h8 id="image1">크라운</h8>
+    <h8 id="image2">앵커</h8>
+    <h8 id="image3">하트</h8>
+    <h8 id="image4">클럽</h8>
+    <h8 id="image5">스페이드</h8>
+    <h8 id="image6">다이아몬드</h8>
+
 </body>
 
 </html>
-
-
-
-<!-- let person = {
-    name: ['Bob', 'Smith'],
-    age: 32,
-    gender: 'male',
-    interests: ['music', 'skiing'],
-    
-};
-document.write(`${person.name}` + '<br>');
-document.write(`${person.name[0]}` + '<br>');
-document.write(`${person.age}` + '<br>');
-document.write(`${person.interests[1]}` + '<br>');
-
-document.write(`${randFace()}`);
-
-console.log(`${randFace()}`); -->
