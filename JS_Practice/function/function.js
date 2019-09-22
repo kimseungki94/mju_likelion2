@@ -118,3 +118,21 @@ function sample1(){
         
     }
 }
+
+//use call function
+
+const bruce = { name : "Bruce" };
+const madeline = { name: "Madeline" };
+
+// 이 함수는 어떤 객체에도 연결되지 않았지만 this를 사용합니다.
+function greet(){
+    return `Hello, I'm ${this.name}`;
+}
+// 함수 호출
+console.log(`greet함수 실행 1 : "${greet()}"`);
+console.log(`greet함수 실행 2 : "${greet.call(bruce)}"`);
+console.log(`greet함수 실행 3 : "${greet.call(madeline)}"`);
+
+// apply (매개변수를 직접받는 call과 달리 배열로 받음)
+
+PaymentRequestUpdateEvent.apply(bruce,[1955,"actor"]);
