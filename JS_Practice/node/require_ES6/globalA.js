@@ -1,1 +1,1 @@
-module.export = () => global.message;
+module.exports = () => global.message;
