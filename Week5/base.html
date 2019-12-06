@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        #body {
+            display: inline-block;
+        }
+
+        #subbody {
+            display: inline-block;
+        }
+    </style>
+
+    <div><input id="name" style="width: 200px;"></input><button id="btn">클릭</button></div>
+
+    <br>
+    <div id="body" style="border: 1px solid #000; float: left; width:400px; height: auto;">
+        <p id="a"></p>
+    </div>
+    <div id="garbage" style=" float: left; width:50px; height: auto;">
+        <p id="a"></p>
+    </div>
+    <div id="subbody" style="border: 1px solid #000; float: left; height: auto; width:350px; margin-bottom: 500px;">
+        <p id="c"></p>
+        <p id="skill"></p>
+        <p id="careerExperience"></p>
+        <p id="peerReview"></p>
+        <p id="customerReview"></p>
+        <p id="pmReview"></p>
+    </div>
+
+    <script>
+        let startresult = 0;
+        let result = 0;
+        const btn = document.querySelector("#btn");
+        const body = document.querySelector("#body");
+        let select;
+        function UpdateStatus(id) {
+            if (result == 0) {
+                $.get(`http://ec2-13-124-188-50.ap-northeast-2.compute.amazonaws.com:8080/staff/${id}`)
+                    .done(function (data) {
+                        var jsonInfo = {};
+                        jsonInfo = JSON.stringify(data);
+                        jsondata = JSON.parse(jsonInfo)
+                        //console.log(jsondata);
+
+                        if (jsondata.직원번호 <= 20) {
+                            $('#c').append('<br>' + '최종학력 : ' + jsondata.최종학력 +
+                                '<br>' + '임직원여부 : ' + jsondata.임직원여부 +
+                                '<br>' + '직원번호 : ' + jsondata.직원번호 +
+                                '<br>' + '직원명 : ' + jsondata.직원명 +
+                                '<br>' + '직원ID : ' + jsondata.직원ID +
+                                '<br>' + '주민등록번호 : ' + jsondata.주민등록번호 +
+                                '<br>' + '부서 : ' + jsondata.부서 +
+                                '<br>' + '경력 : ' + jsondata.경력
+                            );
+                        } else if (jsondata.직원번호 >= 21) {
+                            $('#c').append('<br>' + '최종학력 : ' + jsondata.최종학력 +
+                                '<br>' + '임직원여부 : ' + jsondata.임직원여부 +
+                                '<br>' + '직원번호 : ' + jsondata.직원번호 +
+                                '<br>' + '직원명 : ' + jsondata.직원명 +
+                                '<br>' + '직원ID : ' + jsondata.직원ID +
+                                '<br>' + '주민등록번호 : ' + jsondata.주민등록번호 +
+                                '<br>' + '부서 : ' + jsondata.부서 +
+                                '<br>' + '경력 : ' + jsondata.경력
+                            );
+                            console.log("스킬" + jsondata.스킬.length);
+                            console.log("투입경력" + jsondata.투입경력.length);
+                            console.log("동료평가" + jsondata.동료평가.length);
+                            console.log("고객평가" + jsondata.고객평가.length);
+                            console.log("pm평가" + jsondata.pm평가.length);
+                            $('#skill').append('스킬 : ' + jsondata.스킬);
+                            for (let i = 0; i <= jsondata.투입경력.length; i++) {
+                                if (jsondata.투입경력[i]) {
+                                    $('#careerExperience').append(
+                                        '투입경력' + '<br><br>' +
+                                        '발주처 : ' + jsondata.투입경력[i].발주처 + '<br>' +
+                                        '직원번호 : ' + jsondata.투입경력[i].직원번호 + '<br>' +
+                                        '프로젝트명 : ' + jsondata.투입경력[i].프로젝트명 + '<br>' +
+                                        '직원투입일자 : ' + jsondata.투입경력[i].직원투입일자 + '<br>' +
+                                        '직원종료일자 : ' + jsondata.투입경력[i].직원종료일자 + '<br>' +
+                                        '프로젝트착수일자 : ' + jsondata.투입경력[i].프로젝트착수일자 + '<br>' +
+                                        '프로젝트종료일자 : ' + jsondata.투입경력[i].프로젝트종료일자 + '<br>' +
+                                        '직무 : ' + jsondata.투입경력[i].직무 + '<br>'
+                                    );
+                                }
+
+                            }
+                            $('#peerReview').append('동료평가' + '<br>');
+                            for (let i = 0; i <= jsondata.동료평가.length; i++) {
+                                if (jsondata.동료평가[i]) {
+                                    $('#peerReview').append(
+                                        '<br>' + '평가자 : ' + jsondata.동료평가[i].평가자 + '<br>' +
+                                        '피평가자 : ' + jsondata.동료평가[i].피평가자 + '<br>' +
+                                        '프로젝트 : ' + jsondata.동료평가[i].프로젝트 + '<br>' +
+                                        '발주처 : ' + jsondata.동료평가[i].발주처 + '<br>' +
+                                        '업무평가점수 : ' + jsondata.동료평가[i].업무평가점수 + '<br>' +
+                                        '업무평가점수이유 : ' + jsondata.동료평가[i].업무평가점수이유 + '<br>' +
+                                        '커뮤니케이션평가점수 : ' + jsondata.동료평가[i].커뮤니케이션평가점수 + '<br>' +
+                                        '커뮤니케이션평가점수이유 : ' + jsondata.동료평가[i].커뮤니케이션평가점수이유 + '<br>'
+                                    );
+                                }
+
+                            }
+                            $('#customerReview').append('<br>' + '고객평가' + '<br><br>');
+                            for (let i = 0; i <= jsondata.고객평가.length; i++) {
+                                if (jsondata.고객평가[i]) {
+                                    $('#customerReview').append(
+                                        '평가자 : ' + jsondata.고객평가[i].평가자 + '<br>' +
+                                        '피평가자 : ' + jsondata.고객평가[i].피평가자 + '<br>' +
+                                        '프로젝트 : ' + jsondata.고객평가[i].프로젝트 + '<br>' +
+                                        '발주처 : ' + jsondata.고객평가[i].발주처 + '<br>' +
+                                        '업무평가점수 : ' + jsondata.고객평가[i].업무평가점수 + '<br>' +
+                                        '업무평가점수이유 : ' + jsondata.고객평가[i].업무평가점수이유 + '<br>' +
+                                        '커뮤니케이션평가점수 : ' + jsondata.고객평가[i].커뮤니케이션평가점수 + '<br>' +
+                                        '커뮤니케이션평가점수이유 : ' + jsondata.고객평가[i].커뮤니케이션평가점수이유 + '<br>'
+                                    );
+                                }
+
+                            }
+                            $('#pmReview').append('<br>' + 'pm평가' + '<br><br>');
+                            for (let i = 0; i <= jsondata.pm평가.length; i++) {
+                                if (jsondata.pm평가[i]) {
+                                    $('#pmReview').append(
+                                        '평가자 : ' + jsondata.pm평가[i].평가자 + '<br>' +
+                                        '피평가자 : ' + jsondata.pm평가[i].피평가자 + '<br>' +
+                                        '프로젝트 : ' + jsondata.pm평가[i].프로젝트 + '<br>' +
+                                        '발주처 : ' + jsondata.pm평가[i].발주처 + '<br>' +
+                                        '업무평가점수 : ' + jsondata.pm평가[i].업무평가점수 + '<br>' +
+                                        '업무평가점수이유 : ' + jsondata.pm평가[i].업무평가점수이유 + '<br>' +
+                                        '커뮤니케이션평가점수 : ' + jsondata.pm평가[i].커뮤니케이션평가점수 + '<br>' +
+                                        '커뮤니케이션평가점수이유 : ' + jsondata.pm평가[i].커뮤니케이션평가점수이유 + '<br><br>'
+                                    );
+                                }
+
+                            }
+
+                        }
+                        result = 1;
+                    });
+            } else if (result == 1) {
+
+
+                let subresult = document.getElementById("c");
+                let subskill = document.getElementById("skill");
+                let subcareerExperience = document.getElementById("careerExperience");
+                let subpeerReview = document.getElementById("peerReview");
+                let subcustomerReview = document.getElementById("customerReview");
+                let subpmReview = document.getElementById("pmReview");
+                subresult.innerHTML = "";
+                subskill.innerHTML = "";
+                subcareerExperience.innerHTML = "";
+                subpeerReview.innerHTML = "";
+                subcustomerReview.innerHTML = "";
+                subpmReview.innerHTML = "";
+                $.get(`http://ec2-13-124-188-50.ap-northeast-2.compute.amazonaws.com:8080/staff/${id}`)
+                    .done(function (data) {
+                        var jsonInfo = {};
+                        jsonInfo = JSON.stringify(data);
+                        jsondata = JSON.parse(jsonInfo)
+
+                        if (jsondata.직원번호 <= 20) {
+
+                            $('#c').append('<br>' + '최종학력 : ' + jsondata.최종학력 +
+                                '<br>' + '임직원여부 : ' + jsondata.임직원여부 +
+                                '<br>' + '직원번호 : ' + jsondata.직원번호 +
+                                '<br>' + '직원명 : ' + jsondata.직원명 +
+                                '<br>' + '직원ID : ' + jsondata.직원ID +
+                                '<br>' + '주민등록번호 : ' + jsondata.주민등록번호 +
+                                '<br>' + '부서 : ' + jsondata.부서 +
+                                '<br>' + '경력 : ' + jsondata.경력
+                            );
+                        } else if (jsondata.직원번호 >= 21) {
+                            $('#c').append('<br>' + '최종학력 : ' + jsondata.최종학력 +
+                                '<br>' + '임직원여부 : ' + jsondata.임직원여부 +
+                                '<br>' + '직원번호 : ' + jsondata.직원번호 +
+                                '<br>' + '직원명 : ' + jsondata.직원명 +
+                                '<br>' + '직원ID : ' + jsondata.직원ID +
+                                '<br>' + '주민등록번호 : ' + jsondata.주민등록번호 +
+                                '<br>' + '부서 : ' + jsondata.부서 +
+                                '<br>' + '경력 : ' + jsondata.경력
+                            );
+                            console.log("스킬" + jsondata.스킬.length);
+                            console.log("투입경력" + jsondata.투입경력.length);
+                            console.log("동료평가" + jsondata.동료평가.length);
+                            console.log("고객평가" + jsondata.고객평가.length);
+                            console.log("pm평가" + jsondata.pm평가.length);
+                            $('#skill').append('스킬 : ' + jsondata.스킬);
+                            for (let i = 0; i <= jsondata.투입경력.length; i++) {
+                                if (jsondata.투입경력[i]) {
+                                    $('#careerExperience').append(
+                                        '투입경력' + '<br><br>' +
+                                        '발주처 : ' + jsondata.투입경력[i].발주처 + '<br>' +
+                                        '직원번호 : ' + jsondata.투입경력[i].직원번호 + '<br>' +
+                                        '프로젝트명 : ' + jsondata.투입경력[i].프로젝트명 + '<br>' +
+                                        '직원투입일자 : ' + jsondata.투입경력[i].직원투입일자 + '<br>' +
+                                        '직원종료일자 : ' + jsondata.투입경력[i].직원종료일자 + '<br>' +
+                                        '프로젝트착수일자 : ' + jsondata.투입경력[i].프로젝트착수일자 + '<br>' +
+                                        '프로젝트종료일자 : ' + jsondata.투입경력[i].프로젝트종료일자 + '<br>' +
+                                        '직무 : ' + jsondata.투입경력[i].직무 + '<br>'
+                                    );
+                                }
+
+                            }
+                            $('#peerReview').append('동료평가' + '<br>');
+                            for (let i = 0; i <= jsondata.동료평가.length; i++) {
+                                if (jsondata.동료평가[i]) {
+                                    $('#peerReview').append(
+                                        '<br>' + '평가자 : ' + jsondata.동료평가[i].평가자 + '<br>' +
+                                        '피평가자 : ' + jsondata.동료평가[i].피평가자 + '<br>' +
+                                        '프로젝트 : ' + jsondata.동료평가[i].프로젝트 + '<br>' +
+                                        '발주처 : ' + jsondata.동료평가[i].발주처 + '<br>' +
+                                        '업무평가점수 : ' + jsondata.동료평가[i].업무평가점수 + '<br>' +
+                                        '업무평가점수이유 : ' + jsondata.동료평가[i].업무평가점수이유 + '<br>' +
+                                        '커뮤니케이션평가점수 : ' + jsondata.동료평가[i].커뮤니케이션평가점수 + '<br>' +
+                                        '커뮤니케이션평가점수이유 : ' + jsondata.동료평가[i].커뮤니케이션평가점수이유 + '<br>'
+                                    );
+                                }
+
+                            }
+                            $('#customerReview').append('<br>' + '고객평가' + '<br><br>');
+                            for (let i = 0; i <= jsondata.고객평가.length; i++) {
+                                if (jsondata.고객평가[i]) {
+                                    $('#customerReview').append(
+                                        '평가자 : ' + jsondata.고객평가[i].평가자 + '<br>' +
+                                        '피평가자 : ' + jsondata.고객평가[i].피평가자 + '<br>' +
+                                        '프로젝트 : ' + jsondata.고객평가[i].프로젝트 + '<br>' +
+                                        '발주처 : ' + jsondata.고객평가[i].발주처 + '<br>' +
+                                        '업무평가점수 : ' + jsondata.고객평가[i].업무평가점수 + '<br>' +
+                                        '업무평가점수이유 : ' + jsondata.고객평가[i].업무평가점수이유 + '<br>' +
+                                        '커뮤니케이션평가점수 : ' + jsondata.고객평가[i].커뮤니케이션평가점수 + '<br>' +
+                                        '커뮤니케이션평가점수이유 : ' + jsondata.고객평가[i].커뮤니케이션평가점수이유 + '<br>'
+                                    );
+                                }
+
+                            }
+                            $('#pmReview').append('<br>' + 'pm평가' + '<br><br>');
+                            for (let i = 0; i <= jsondata.pm평가.length; i++) {
+                                if (jsondata.pm평가[i]) {
+                                    $('#pmReview').append(
+                                        '평가자 : ' + jsondata.pm평가[i].평가자 + '<br>' +
+                                        '피평가자 : ' + jsondata.pm평가[i].피평가자 + '<br>' +
+                                        '프로젝트 : ' + jsondata.pm평가[i].프로젝트 + '<br>' +
+                                        '발주처 : ' + jsondata.pm평가[i].발주처 + '<br>' +
+                                        '업무평가점수 : ' + jsondata.pm평가[i].업무평가점수 + '<br>' +
+                                        '업무평가점수이유 : ' + jsondata.pm평가[i].업무평가점수이유 + '<br>' +
+                                        '커뮤니케이션평가점수 : ' + jsondata.pm평가[i].커뮤니케이션평가점수 + '<br>' +
+                                        '커뮤니케이션평가점수이유 : ' + jsondata.pm평가[i].커뮤니케이션평가점수이유 + '<br><br>'
+                                    );
+                                }
+
+                            }
+                        }
+                    });
+            }
+        }
+        btn.onclick = () => {
+            let id = document.querySelector("#name").value;
+            if (startresult == 0) {
+                $.get(`http://ec2-13-124-188-50.ap-northeast-2.compute.amazonaws.com:8080/search/?query=${id}`)
+                    .done(function (data) {
+                        var jsonInfo = {};
+                        jsonInfo = JSON.stringify(data);
+                        var jsondata;
+                        var newDiv = document.createElement("div");
+                        var newContent;
+                        var new2Content;
+                        jsondata = JSON.parse(jsonInfo)
+                        console.log(jsondata);
+
+                        for (let i = 0; i <= data.length; i++) {
+                            if (jsondata[i]) {
+                                $('#a').append('<br>' + '이름 : ' + jsondata[i].직원명 + "  " + '주민번호 : '
+                                    + jsondata[i].주민등록번호 + `  <input type="button" id=button${jsondata[i].직원번호} onclick=UpdateStatus(${jsondata[i].직원번호}) value="상세보기">` +
+                                    '<br>');
+                            }
+
+                        }
+                        startresult = 1;
+                    })
+            } else if (startresult == 1) {
+                $.get(`http://ec2-13-124-188-50.ap-northeast-2.compute.amazonaws.com:8080/search/?query=${id}`)
+                    .done(function (data) {
+                        let mainresult = document.getElementById("a");
+                        mainresult.innerHTML = "";
+
+                        var jsonInfo = {};
+                        jsonInfo = JSON.stringify(data);
+                        var jsondata;
+                        var newDiv = document.createElement("div");
+                        var newContent;
+                        var new2Content;
+                        jsondata = JSON.parse(jsonInfo)
+                        console.log(jsondata);
+
+                        for (let i = 0; i <= data.length; i++) {
+                            if (jsondata[i]) {
+                                $('#a').append('<br>' + '이름 : ' + jsondata[i].직원명 + "  " + '주민번호 : '
+                                    + jsondata[i].주민등록번호 + `<input type="button" id=button${jsondata[i].직원번호} onclick=UpdateStatus(${jsondata[i].직원번호}) value="상세보기">` +
+                                    '<br>');
+                            }
+
+                        }
+                    })
+            }
+
+        }
+    </script>
+</body>
+
+</html>
